@@ -1,43 +1,87 @@
-interface Product {
-    void use();
+// Product Interface
+interface Logger {
+    void log(String message);
 }
 
-class ConcreteProductA implements Product {
-    public void use() {
-        System.out.println("Using Product A");
+// Concrete Product 1: Console Logger
+class ConsoleLogger implements Logger {
+    @Override
+    public void log(String message) {
+        System.out.println("Console Log: " + message);
     }
 }
 
-class ConcreteProductB implements Product {
-    public void use() {
-        System.out.println("Using Product B");
+// Concrete Product 2: File Logger
+class FileLogger implements Logger {
+    @Override
+    public void log(String message) {
+        System.out.println("File Log: " + message + " (logged to file)");
+        // In a real application, you would write to a file here
     }
 }
 
-abstract class Creator {
-    public abstract Product factoryMethod();
-}
-
-class ConcreteCreatorA extends Creator {
-    public Product factoryMethod() {
-        return new ConcreteProductA();
+// Concrete Product 3: Database Logger
+class DatabaseLogger implements Logger {
+    @Override
+    public void log(String message) {
+        System.out.println("Database Log: " + message + " (logged to database)");
+        // In a real application, you would insert into a database here
     }
 }
 
-class ConcreteCreatorB extends Creator {
-    public Product factoryMethod() {
-        return new ConcreteProductB();
+// Creator Abstract Class
+abstract class LoggerFactory {
+    // The factory method (abstract)
+    public abstract Logger createLogger();
+
+    // An operation that uses the created logger
+    public void logMessage(String message) {
+        Logger logger = createLogger(); // Call the factory method
+        logger.log(message);
     }
 }
 
+// Concrete Creator 1: Console LoggerFactory
+class ConsoleLoggerFactory extends LoggerFactory {
+    @Override
+    public Logger createLogger() {
+        return new ConsoleLogger();
+    }
+}
+
+// Concrete Creator 2: File LoggerFactory
+class FileLoggerFactory extends LoggerFactory {
+    @Override
+    public Logger createLogger() {
+        return new FileLogger();
+    }
+}
+
+// Concrete Creator 3: Database LoggerFactory
+class DatabaseLoggerFactory extends LoggerFactory {
+    @Override
+    public Logger createLogger() {
+        return new DatabaseLogger();
+    }
+}
+
+// Client Usage
 public class FactoryPattern {
     public static void main(String[] args) {
-        Creator creatorA = new ConcreteCreatorA();
-        Product productA = creatorA.factoryMethod();
-        productA.use();
+        // Use Console Logger
+        LoggerFactory consoleFactory = new ConsoleLoggerFactory();
+        consoleFactory.logMessage("This is a console message.");
 
-        Creator creatorB = new ConcreteCreatorB();
-        Product productB = creatorB.factoryMethod();
-        productB.use();
+        System.out.println("--------------------");
+
+        // Use File Logger
+        LoggerFactory fileFactory = new FileLoggerFactory();
+        fileFactory.logMessage("This is a file message.");
+
+        System.out.println("--------------------");
+
+        // Use Database Logger
+        LoggerFactory databaseFactory = new DatabaseLoggerFactory();
+        databaseFactory.logMessage("This is a database message.");
     }
 }
