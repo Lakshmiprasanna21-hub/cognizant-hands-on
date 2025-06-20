@@ -1,25 +1,26 @@
 import java.util.Scanner;
 
-public class FinancialForecast {
+public class Financial {
 
-    public static double forecast(double currentValue, double annualGrowthRate, int years) {
-        return currentValue * Math.pow(1 + annualGrowthRate / 100, years);
+    public static double forecastRevenue(double currentRevenue, double growthRate, int years) {
+        return currentRevenue * Math.pow(1 + growthRate / 100, years);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter current revenue (₹): ");
+        System.out.print("Enter current revenue: ");
         double currentRevenue = scanner.nextDouble();
 
         System.out.print("Enter annual growth rate (%): ");
         double growthRate = scanner.nextDouble();
 
-        System.out.print("Enter number of years: ");
+        System.out.print("Enter number of years to forecast: ");
         int years = scanner.nextInt();
 
-        double forecastedRevenue = forecast(currentRevenue, growthRate, years);
+        double futureRevenue = forecastRevenue(currentRevenue, growthRate, years);
 
-        System.out.printf("Forecasted revenue after %d years: ₹%.2f\n", years, forecastedRevenue);
+        System.out.printf("Forecasted revenue after %d years: %.2f\n", years, futureRevenue);
+    scanner.close();
     }
 }
