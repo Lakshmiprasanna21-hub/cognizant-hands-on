@@ -4,16 +4,16 @@ This repository contains my hands-on practice solutions for Cognizant DN 4.0 Dee
 ## Folder Structure
 
 - Week1_Java
-  - Code/
-  - Output/
+  - Code
+  - Output
 
 (More weeks and skills will be added soon)
 
 ## How to Use
 
 Click into each week's folder to view:
-- Source code inside Code/
-- Output screenshots inside Output/
+- Source code inside Code
+- Output screenshots inside Output
 
 ## Author
 
