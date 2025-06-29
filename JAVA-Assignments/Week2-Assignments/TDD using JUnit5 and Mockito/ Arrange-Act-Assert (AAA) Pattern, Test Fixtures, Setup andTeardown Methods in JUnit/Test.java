@@ -7,65 +7,49 @@ public class CalculatorTest {
 
     Calculator calc;
 
-    // --- Setup before each test
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Before all tests");
+    }
+
     @BeforeEach
     void setUp() {
         calc = new Calculator();
         System.out.println("Before each test");
     }
 
-    // --- Cleanup after each test
     @AfterEach
     void tearDown() {
         System.out.println("After each test");
     }
 
-    // --- Run once before all tests
-    @BeforeAll
-    static void initAll() {
-        System.out.println("Before all tests");
-    }
-
-    // --- Run once after all tests
     @AfterAll
-    static void cleanUpAll() {
+    static void afterAll() {
         System.out.println("After all tests");
     }
 
-    // --- Arrange-Act-Assert pattern examples:
-
     @Test
-    void testAddition() {
-        // Arrange
-        int a = 10, b = 5;
-
-        // Act
-        int result = calc.add(a, b);
-
-        // Assert
-        assertEquals(15, result);
+    void testAdd() {
+        assertEquals(15, calc.add(10, 5));
     }
 
     @Test
-    void testSubtraction() {
-        int result = calc.subtract(10, 4);
-        assertEquals(6, result);
+    void testSubtract() {
+        assertEquals(6, calc.subtract(10, 4));
     }
 
     @Test
-    void testMultiplication() {
-        int result = calc.multiply(3, 4);
-        assertEquals(12, result);
+    void testMultiply() {
+        assertEquals(20, calc.multiply(4, 5));
     }
 
     @Test
-    void testDivision() {
-        int result = calc.divide(12, 3);
-        assertEquals(4, result);
+    void testDivide() {
+        assertEquals(3, calc.divide(9, 3));
     }
 
     @Test
-    void testDivisionByZero() {
+    void testDivideByZero() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calc.divide(10, 0);
         });
